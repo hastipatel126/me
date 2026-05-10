@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasti Janjrukiya — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F7F4EF;
+  --ink: #1A1714;
+  --ink-soft: #3D3833;
+  --ink-muted: #7A7269;
+  --accent: #2E6B4F;
+  --accent-light: #E8F2EC;
+  --accent-warm: #C4834A;
+  --accent-warm-light: #FAF0E8;
+  --border: rgba(26,23,20,0.1);
+  --border-strong: rgba(26,23,20,0.2);
+  --card-bg: #FFFFFF;
+  --section-bg: #F2EEE8;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── NAVIGATION ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  background: rgba(247,244,239,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 5rem;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 4rem 5rem 3rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  color: var(--ink-muted);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  transition: all 0.25s;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  transition: all 0.25s;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hero-right {
+  background: var(--section-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-right::before {
+  content: 'HJ';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22rem;
+  font-weight: 300;
+  color: rgba(26,23,20,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 340px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-box {
+  background: var(--cream);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-num.green { color: var(--accent); }
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.location-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.location-tag::before {
+  content: '◎';
+  color: var(--accent);
+}
+
+/* ── SECTION COMMONS ── */
+section { padding: 6rem 3rem; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  margin-left: auto;
+}
+
+/* ── PROJECTS ── */
+.projects-section { background: var(--cream); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.proj-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: default;
+}
+
+.proj-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.proj-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.proj-card:hover::after { transform: scaleX(1); }
+
+.proj-card.featured {
+  grid-column: span 2;
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.proj-card.featured::after { background: var(--accent); }
+
+.proj-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.proj-card.featured .proj-number { color: #6BBF91; }
+
+.proj-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid rgba(46,107,79,0.2);
+}
+
+.proj-card.featured .proj-badge {
+  background: rgba(46,107,79,0.3);
+  color: #6BBF91;
+  border-color: rgba(107,191,145,0.3);
+}
+
+.proj-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.proj-card.featured .proj-name { color: var(--cream); }
+
+.proj-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.25rem;
+}
+
+.proj-card.featured .proj-role { color: rgba(247,244,239,0.5); }
+
+.proj-desc {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
+
+.proj-card.featured .proj-desc { color: rgba(247,244,239,0.75); }
+
+.proj-highlights {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+}
+
+.proj-highlights li {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+.proj-card.featured .proj-highlights li { color: rgba(247,244,239,0.7); }
+
+.proj-highlights li::before {
+  content: '→';
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+.proj-card.featured .proj-highlights li::before { color: #6BBF91; }
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  background: var(--section-bg);
+  color: var(--ink-soft);
+  border: 1px solid var(--border);
+}
+
+.proj-card.featured .tech-tag {
+  background: rgba(255,255,255,0.07);
+  color: rgba(247,244,239,0.65);
+  border-color: rgba(255,255,255,0.12);
+}
+
+/* ── SKILLS ── */
+.skills-section { background: var(--section-bg); }
+
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.skills-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  position: sticky;
+  top: 6rem;
+}
+
+.skill-categories { display: flex; flex-direction: column; gap: 2rem; }
+
+.skill-cat {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.skill-cat-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-item {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  padding: 0.4rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.skill-item:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* ── EDUCATION ── */
+.education-section { background: var(--cream); }
+
+.edu-timeline { display: flex; flex-direction: column; gap: 0; }
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0 3rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.edu-item::before {
+  content: '';
+  position: absolute;
+  left: 188px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.edu-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.06em;
+  padding-top: 0.25rem;
+  text-align: right;
+}
+
+.edu-body {}
+
+.edu-school {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.edu-degree {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.edu-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.edu-cgpa {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  background: var(--accent-light);
+  border: 1px solid rgba(46,107,79,0.2);
+}
+
+/* ── CERTIFICATES ── */
+.certs-section { background: var(--section-bg); }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.cert-card {
+  background: var(--cream);
+  padding: 1.75rem;
+  transition: background 0.2s;
+}
+
+.cert-card:hover { background: var(--card-bg); }
+
+.cert-issuer {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.cert-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 6rem 3rem;
+}
+
+.contact-section .section-title { color: var(--cream); }
+.contact-section .section-num { color: #6BBF91; }
+.contact-section .section-line { background: rgba(247,244,239,0.1); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(247,244,239,0.7);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.contact-items { display: flex; flex-direction: column; gap: 1rem; }
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
+  color: var(--cream);
+  transition: all 0.2s;
+}
+
+.contact-item:hover {
+  background: rgba(46,107,79,0.2);
+  border-color: rgba(46,107,79,0.4);
+}
+
+.contact-icon {
+  font-size: 1.1rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.contact-info {}
+
+.contact-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: rgba(247,244,239,0.4);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.contact-val {
+  font-size: 0.9rem;
+  color: rgba(247,244,239,0.85);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: rgba(247,244,239,0.4);
+}
+
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(247,244,239,0.25);
+  letter-spacing: 0.08em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-left > * {
+  animation: fadeUp 0.7s ease both;
+}
+.hero-eyebrow { animation-delay: 0.1s; }
+.hero-name    { animation-delay: 0.2s; }
+.hero-title   { animation-delay: 0.3s; }
+.hero-desc    { animation-delay: 0.4s; }
+.hero-links   { animation-delay: 0.5s; }
+
+.stats-grid   { animation: fadeUp 0.7s 0.3s ease both; }
+.location-tag { animation: fadeUp 0.7s 0.5s ease both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { grid-column: span 1; }
+  .proj-highlights { grid-template-columns: 1fr; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .skills-intro { position: static; }
+  .edu-item { grid-template-columns: 1fr; }
+  .edu-item::before { display: none; }
+  .edu-year { text-align: left; }
+  .contact-grid { grid-template-columns: 1fr; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero-left { padding: 4rem 1.5rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Hasti <span>Janjrukiya</span></div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1 class="hero-name">Hasti<br><em>Janjrukiya</em></h1>
+    <p class="hero-title">AI & ML Developer · Full-Stack Engineer</p>
+    <p class="hero-desc">
+      Building intelligent, real-world applications at the intersection of AI and full-stack development. Currently in my 3rd year of B.Tech Computer Engineering at Atmiya University, Rajkot.
+    </p>
+    <div class="hero-links">
+      <a href="#contact" class="btn-primary">Get in touch →</a>
+      <a href="https://github.com/hastipatel126" target="_blank" class="btn-outline">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/hasti-janjrukiya-7b1ab2372/" target="_blank" class="btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-num green">4</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">7.76</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Certificates</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num green">3rd</div>
+        <div class="stat-label">Year</div>
+      </div>
+    </div>
+    <div class="location-tag">Rajkot, Gujarat, India</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- AGROSENSE — FEATURED -->
+    <div class="proj-card featured">
+      <div class="proj-number">
+        <span>001 · FLAGSHIP</span>
+        <span class="proj-badge">AI · Deployed · Full-Stack</span>
+      </div>
+      <h3 class="proj-name">AgroSense</h3>
+      <p class="proj-role">Full-Stack Developer · AI Integration · React + Flask + Gemini AI</p>
+      <p class="proj-desc">
+        An AI-powered agricultural platform that enables farmers to diagnose plant diseases in real time by uploading crop photos. Integrated with Google Gemini AI for instant disease identification, severity scoring, and personalized treatment plans — with full Gujarati language support for local farmers.
+      </p>
+      <ul class="proj-highlights">
+        <li>Gemini AI API for real-time plant diagnosis & treatment plans</li>
+        <li>LRU-based image cache reducing redundant API calls</li>
+        <li>Multi-API fallback architecture for high availability</li>
+        <li>Yield prediction for 14 crops across 33 Gujarat cities</li>
+        <li>Live market prices for 25+ agricultural commodities</li>
+        <li>Client-side WebP compression cutting payload by ~60%</li>
+        <li>10+ modular React components with Gujarati i18n</li>
+        <li>Deployed on Render with Vite production build pipeline</li>
+      </ul>
+      <div class="tech-tags">
+        <span class="tech-tag">React 19</span>
+        <span class="tech-tag">Vite</span>
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Flask</span>
+        <span class="tech-tag">Gemini AI</span>
+        <span class="tech-tag">Framer Motion</span>
+        <span class="tech-tag">REST API</span>
+        <span class="tech-tag">Render</span>
+      </div>
+    </div>
+
+    <!-- SCHEDULIFY -->
+    <div class="proj-card">
+      <div class="proj-number">
+        <span>002</span>
+        <span class="proj-badge">Full-Stack · PHP</span>
+      </div>
+      <h3 class="proj-name">Schedulify</h3>
+      <p class="proj-role">Developer · PHP · MySQL · Bootstrap</p>
+      <p class="proj-desc">
+        A full-stack student productivity platform with real-time task management, Pomodoro timer, drag-and-drop scheduling, and a smart notification system — built on a modular PHP backend with user authentication.
+      </p>
+      <ul class="proj-highlights">
+        <li>Real-time dashboard with priority alerts & motivational quotes</li>
+        <li>Modular PHP: TaskManager, UserManager, NotificationManager</li>
+        <li>RESTful API layer for all task operations</li>
+        <li>MySQL schema for user auth & dynamic scheduling</li>
+      </ul>
+      <div class="tech-tags">
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Bootstrap</span>
+        <span class="tech-tag">REST API</span>
+      </div>
+    </div>
+
+    <!-- FRAUD DETECTION -->
+    <div class="proj-card">
+      <div class="proj-number">
+        <span>003</span>
+        <span class="proj-badge">ML · Data Science</span>
+      </div>
+      <h3 class="proj-name">Fraud Detection System</h3>
+      <p class="proj-role">ML Developer · Python · FastAPI · Docker</p>
+      <p class="proj-desc">
+        Advanced real-time financial fraud detection using unsupervised anomaly detection. Integrated Kafka streaming pipeline for live transaction monitoring with production deployment via Docker.
+      </p>
+      <ul class="proj-highlights">
+        <li>Isolation Forest + Autoencoder deep anomaly detection</li>
+        <li>Kafka streaming for live transaction monitoring</li>
+        <li>FastAPI backend + PostgreSQL for secure storage</li>
+        <li>Docker deployment — high precision, low false positives</li>
+      </ul>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">TensorFlow</span>
+        <span class="tech-tag">PyTorch</span>
+        <span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">Kafka</span>
+        <span class="tech-tag">Docker</span>
+        <span class="tech-tag">PostgreSQL</span>
+      </div>
+    </div>
+
+    <!-- RECOMMENDATION -->
+    <div class="proj-card">
+      <div class="proj-number">
+        <span>004</span>
+        <span class="proj-badge">ML · NLP · E-commerce</span>
+      </div>
+      <h3 class="proj-name">Recommendation System</h3>
+      <p class="proj-role">ML Developer · NLP · FastAPI · PostgreSQL</p>
+      <p class="proj-desc">
+        Hybrid e-commerce recommendation engine combining collaborative filtering, SVD++, and Neural Collaborative Filtering with BERT/Word2Vec NLP embeddings for personalized product rankings.
+      </p>
+      <ul class="proj-highlights">
+        <li>SVD++, NCF, cosine similarity & KNN recommenders</li>
+        <li>BERT + TF-IDF + Word2Vec for content-based filtering</li>
+        <li>FastAPI backend + PostgreSQL + Docker deployment</li>
+        <li>Improves user engagement, retention & conversion rates</li>
+      </ul>
+      <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">PyTorch</span>
+        <span class="tech-tag">BERT</span>
+        <span class="tech-tag">NLP</span>
+        <span class="tech-tag">Scikit-learn</span>
+        <span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">Docker</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-layout">
+    <p class="skills-intro">
+      A builder who spans the full stack — from training ML models to shipping polished user interfaces.
+    </p>
+    <div class="skill-categories">
+      <div class="skill-cat">
+        <div class="skill-cat-title">AI & Machine Learning</div>
+        <div class="skill-list">
+          <span class="skill-item">Machine Learning</span>
+          <span class="skill-item">Deep Learning</span>
+          <span class="skill-item">NLP</span>
+          <span class="skill-item">Gemini AI API</span>
+          <span class="skill-item">TensorFlow</span>
+          <span class="skill-item">PyTorch</span>
+          <span class="skill-item">Scikit-learn</span>
+          <span class="skill-item">Pandas</span>
+          <span class="skill-item">NumPy</span>
+          <span class="skill-item">Prompt Engineering</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Frontend Development</div>
+        <div class="skill-list">
+          <span class="skill-item">React 19</span>
+          <span class="skill-item">JavaScript</span>
+          <span class="skill-item">HTML & CSS</span>
+          <span class="skill-item">Vite</span>
+          <span class="skill-item">Framer Motion</span>
+          <span class="skill-item">Bootstrap</span>
+          <span class="skill-item">Responsive Design</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Backend & Databases</div>
+        <div class="skill-list">
+          <span class="skill-item">Python</span>
+          <span class="skill-item">PHP</span>
+          <span class="skill-item">Flask</span>
+          <span class="skill-item">FastAPI</span>
+          <span class="skill-item">MySQL</span>
+          <span class="skill-item">PostgreSQL</span>
+          <span class="skill-item">REST API Design</span>
+          <span class="skill-item">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">DevOps & Tools</div>
+        <div class="skill-list">
+          <span class="skill-item">Docker</span>
+          <span class="skill-item">Apache Kafka</span>
+          <span class="skill-item">Git & GitHub</span>
+          <span class="skill-item">Render</span>
+          <span class="skill-item">Jupyter</span>
+          <span class="skill-item">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="education-section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-timeline">
+    <div class="edu-item">
+      <div class="edu-year">2023 – 2027</div>
+      <div class="edu-body">
+        <div class="edu-school">Atmiya University, Rajkot</div>
+        <div class="edu-degree">B.Tech Computer Engineering · 3rd Year Completed</div>
+        <div class="edu-meta">
+          <span class="edu-cgpa">CGPA 7.76</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2023</div>
+      <div class="edu-body">
+        <div class="edu-school">K.G. Dholakiya School</div>
+        <div class="edu-degree">12th Standard · Gujarat Board</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">2021</div>
+      <div class="edu-body">
+        <div class="edu-school">L.G. Dholakiya School</div>
+        <div class="edu-degree">10th Standard · Gujarat Board</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section class="certs-section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Certificates</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-issuer">TATA Group</div>
+      <div class="cert-name">GenAI Power Data Analytics Job Simulation</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Skills4Future</div>
+      <div class="cert-name">Green Skills & Artificial Intelligence</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">TPSDI</div>
+      <div class="cert-name">Solar Skills for Engineer</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">TPSDI</div>
+      <div class="cert-name">The Promise of Green Hydrogen</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">TPSDI</div>
+      <div class="cert-name">800MW Thermal Power Plant Familiarization</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Market Maya · Multicon</div>
+      <div class="cert-name">Code 2 Trade Hackathon</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Design Spirit · Volunteer</div>
+      <div class="cert-name">Event Management</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="contact-grid">
+    <div>
+      <p class="contact-text">
+        Open to internships, collaborations, and exciting opportunities in AI, ML, and full-stack development.
+      </p>
+      <a href="mailto:hastiofficial126@gmail.com" class="btn-primary" style="display:inline-flex">Send an email →</a>
+    </div>
+
+    <div class="contact-items">
+      <a href="mailto:hastiofficial126@gmail.com" class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div class="contact-info">
+          <div class="contact-label">Email</div>
+          <div class="contact-val">hastiofficial126@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+918401414833" class="contact-item">
+        <div class="contact-icon">✆</div>
+        <div class="contact-info">
+          <div class="contact-label">Phone</div>
+          <div class="contact-val">+91 84014 14833</div>
+        </div>
+      </a>
+      <a href="https://github.com/hastipatel126" target="_blank" class="contact-item">
+        <div class="contact-icon">⌥</div>
+        <div class="contact-info">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val">github.com/hastipatel126</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/hasti-janjrukiya-7b1ab2372/" target="_blank" class="contact-item">
+        <div class="contact-icon">in</div>
+        <div class="contact-info">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-val">hasti-janjrukiya-7b1ab2372</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <div class="contact-icon">◎</div>
+        <div class="contact-info">
+          <div class="contact-label">Location</div>
+          <div class="contact-val">Rajkot, Gujarat, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Hasti Janjrukiya</div>
+  <div class="footer-copy">© 2025 · Built with care</div>
+</footer>
+
+</body>
+</html>

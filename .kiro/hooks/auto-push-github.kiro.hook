@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Auto-push to GitHub",
+  "description": "Automatically commits and pushes changes to GitHub when files are edited",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.html",
+      "*.json",
+      "*.md"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git add . && git commit -m \"Auto-update portfolio\" && git push origin main",
+    "timeout": 30
+  }
+}
